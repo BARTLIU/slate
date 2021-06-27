@@ -6,8 +6,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='#'>The API Key might be requried for some API Endpoints</a>
+  - <a href='https://www.btse.com/en/home'>Documentation Powered by BTSE</a>
 
 
 search: true

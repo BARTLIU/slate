@@ -1862,7 +1862,7 @@ Please refer response example
 
 
 
-<aside class="warning"> Authentication - Needed </aside> 
+<aside class="success"> Authentication - No Needed </aside> 
 
 ## Get Verification Code 
 apply verification

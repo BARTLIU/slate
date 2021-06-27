@@ -3,16 +3,12 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - Java
-  - python
-  - javascript
+
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
-includes:
-  - errors
 
 search: true
 
@@ -2175,23 +2171,1514 @@ Please refer response example
 
 # Wallet
 
-## Example
+## Query Crypto List	
 
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
+> Response Example: 200
 
 ```json
-
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1607919901335,
+    "data": [
+        "ETH",
+        "USDT"
+    ],
+    "success": true
+}
 ```
 
 
 ### HTTP Request
-`GET /v1/user`<br>
+`GET /v1/wallet/crypto_list	`
+
+### URL Parameters
+None
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="success"> Authentication - No Needed </aside> 
+
+## Query Balance
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1606712058993,
+    "data": {
+        "total": 159385894.575993,
+        "balance": [
+            {
+                "currency": "USDT",
+                "total": 2000000,
+                "available": 2000000,
+                "frozen": 0,
+                "convertRate": 28.42165482,
+                "type": 3
+            },
+            {
+                "currency": "ETH",
+                "total": 3600,
+                "available": 3600,
+                "frozen": 0,
+                "convertRate": 14649.05939603,
+                "type": 2
+            },
+            {
+                "currency": "TWD",
+                "total": 1001942.1649,
+                "available": 992015.1649,
+                "frozen": 9927,
+                "convertRate": 1,
+                "type": 1
+            }
+        ]
+    },
+    "success": true
+}
+```
+
+> Response Example: 400 未知用户类型
+
+```json
+{
+    "code": 10008,
+    "msg": "未知用户类型",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 token过期 
+
+```json
+{
+    "code": 10002,
+    "msg": "token过期",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 获取币种列表出错
+
+```json
+{
+    "code": -4041,
+    "msg": "获取币种列表出错",
+    "time": 1597653727373,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 获取用户钱包列表出错
+
+```json
+{
+    "code": -1009,
+    "msg": "获取用户钱包列表出错",
+    "time": 1597653727373,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 未知的币种
+
+```json
+{
+    "code": -2023,
+    "msg": "未知的币种",
+    "time": 1597653727373,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`GET /v1/wallet/balance	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Descript|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|currency|String|Y|currency name|TWD|換算成的幣別，Default: TWD|
+
+
+### Response
+Type: <br>
+FIAT = 1,<br>
+CRYPTO = 2,<br>
+STABLE = 3
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get Wallet/Trade History
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1622789813889,
+    "data": {
+        "totalRows": 24,
+        "pageSize": 10,
+        "currentPage": 1,
+        "totalPages": 3,
+        "data": [
+            {
+                "currencyType": 3,
+                "auditId": "20210602000660",
+                "amount": 1.0,
+                "clientAmount": 1.0,
+                "fee": 0E-10,
+                "transactionRef": "20210602000661",
+                "emailRef": "chiakai.chenggga@nogle.com",
+                "receivedAmount": 1.0,
+                "type": 6,
+                "quoteOrderCurrency": "USDT",
+                "updateTimestamp": 1622769931664,
+                "quoteBaseCurrency": "USDT",
+                "createTimestamp": 1622620814927,
+                "inOutType": 2,
+                "errCode": null,
+                "remarks": null,
+                "status": 15,
+                "bankRef": "Chiakai5@bitgin"
+            },
+            {
+                "currencyType": 1,
+                "auditId": "20210531088547",
+                "amount": 100.0,
+                "clientAmount": 100.0,
+                "fee": 0E-10,
+                "transactionRef": "20210531088548",
+                "emailRef": "chiakai.chenggga@nogle.com",
+                "receivedAmount": 100.0,
+                "type": 6,
+                "quoteOrderCurrency": "TWD",
+                "updateTimestamp": 1622633352354,
+                "quoteBaseCurrency": "TWD",
+                "createTimestamp": 1622479647650,
+                "inOutType": 2,
+                "errCode": null,
+                "remarks": null,
+                "status": 25,
+                "bankRef": "Chiakai5@bitgin"
+            },
+            {
+                "currencyType": 1,
+                "auditId": "5d9846f2-0c01-44fb-a69a-597e7d2ffeab",
+                "fromBank": {},
+                "amount": 333.0,
+                "clientAmount": 318.0,
+                "fee": 15.0000000000,
+                "transactionRef": "20210602000664",
+                "emailRef": null,
+                "receivedAmount": 0.0,
+                "type": 2,
+                "quoteOrderCurrency": "TWD",
+                "updateTimestamp": 1622628493937,
+                "quoteBaseCurrency": "TWD",
+                "createTimestamp": 1622623452029,
+                "inOutType": 2,
+                "errCode": null,
+                "toBank": {
+                    "accountHolder": "月",
+                    "code": "809",
+                    "name": "凱基商業銀行　台中分行",
+                    "account": "1531087300"
+                },
+                "remarks": null,
+                "status": 16,
+                "bankRef": null
+            },
+            {
+                "currencyType": 3,
+                "auditId": "d36b2d0a-4fe1-44fe-abe5-deca983bacf9",
+                "amount": 9999.0,
+                "clientAmount": 10000.0,
+                "fee": 1.0000000000,
+                "transactionRef": "20210602000616",
+                "emailRef": "manual_adjustment",
+                "receivedAmount": 10000.0,
+                "type": 1,
+                "quoteOrderCurrency": "USDT",
+                "updateTimestamp": 1622603398419,
+                "quoteBaseCurrency": "USDT",
+                "createTimestamp": 1622603389301,
+                "toReceiver": {},
+                "inOutType": 1,
+                "errCode": null,
+                "remarks": "w",
+                "status": 10,
+                "bankRef": "Manual_adjustment"
+            }
+        ]
+    },
+    "success": true
+}
+```
+
+> Response Example: 400 token过期
+
+```json
+{
+    "code": 10002,
+    "msg": "token过期",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 获取用户钱包列表出错
+
+```json
+
+{
+    "code": -1009,
+    "msg": "获取用户钱包列表出错",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 获取用户钱包出错
+
+```json
+{
+    "code": -2024,
+    "msg": "获取用户钱包出错",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Enum
+
+```json
+{
+    InOutType{
+    IN(1),
+    OUT(2);
+}
+TransactinType{
+    DEPOSIT(1, "Deposit"),
+    WITHDRAW(2, "Withdraw"),
+    BUY(3, "Buy"),
+    SELL(4, "Sell")
+}
+Status{
+    OPEN(1, "Open"),//开放
+    LOCKED (2, "Locked"),//锁定
+    PENDINGAPPROVAL(3,"PendingApproval"),//已提交
+    APPROVED(4, "Approved"),//已完成（提现第二个人审批通过时用）
+    PENDINGINCS(5, "PendignInCS"),//第一个人退给客服
+    CANCELED(6, "Cancel"),//关闭(终结申请  暂用于手动调整)
+    PENDINGINCSLOCK(7, "Pending in CS Lock"),//由pendingCS进行锁定
+    COMPLETED(10, "Completed"),//成功
+    PENDINGEXPIRE(11, "PendingExpire"),//过期 未批准(第一个人)
+    WAITINGEXPIRE(13, "WaitingExpire"),//等待过期 已批准(第二个人)
+    EXPIRED(14, "Expired"), //已过期
+    FAILED(15, "Failed"),//提现失败（treasury汇款失败）
+    USERCANCELED(16, "User Cancel"),//用户取消本次提现/转账
+    PENDING(17,"Pending"),//邮件取款，在用户的金额未冻结前，admin不能审核，至于admin能不能看到，看需求
+    COINCANCELED(18, "Coin engine cancel"),//coin engine 取消
+    TRANSFERING(19, "Transfering by engine"),  // transfering by engine
+    TRANSFERING_TIMEOUT(20, "Engine transfer notification timeout"),
+    TRANSFERING_FAILED(21, "Engine transfer failed"),
+    CONVERTING(22, "Converting by engine"),
+    CONVERTING_TIMEOUT(23, "Engine convert notification timeout"),
+    CONVERTING_FAILED(24, "Engine convert failed"),
+    EMAIL_CONFIRMED(25, "Email Confirmed")// Send to 按下後 Email 回到BITGIN，但未按下 Confirm
+}
+}
+```
+
+
+### HTTP Request
+`GET /v1/wallet/historyList	`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|query|array|N|currency + transaction type的查詢組合|TWD-1, TWD-2, USDT-1, ETH-2||
+|startDate|String|N|yyyy-MM-dd|2020-01-01|預設：2020-01-01|
+|endDate|String|N|yyyy-MM-dd|2020-12-31|預設：2020-12-31|
+|pageSize|int|N|總頁數|12|預設: 10|
+|pageNum|int|N|起始頁面|1|預設: 1|
+|isTxn|Boolean|N|true: 買賣交易紀錄false: 出入金紀錄|true||
+|auditIds|String|N|交易資料Ids|20210602000660,20210602000617,5d9846f2-0c01-44fb-a69a-597e7d2ffeab||
+
+#### Transaction Type 
+DEPOSIT(1, "Deposit"),
+<br>WITHDRAW(2, "Withdraw"),
+<br>BUY(3, "Buy"),
+<br>SELL(4, "Sell"),
+<br>TRANSFER_IN(5, "Transfer_In"),
+<br>TRANSFER_OUT(6, "Transfer_Out"),
+
+### Response
+|FE|BE|Type|Note|
+|--- |--- |--- |--- |
+|inOutType|inOutType|int|require, buy/sell都是in|
+|type|type|int|Transaction Type|
+|currencyType|currencyType|int|FIAT = 1,CRYPTO = 2,STABLE = 3|
+|amount|amount|double|require|
+|receivedAmount|receivedAmount|double|require|
+|clientAmount|clientAmount|double|require|
+|fee|fee|double|require|
+|status|status|int|history  statusOPEN(1, "Open", "PROCESSING")CANCELED(6, "Cancel", "CANCELED"),COMPLETED(10, "Completed", "COMPLETED"),PENDING(17, "Pending", "PENDING"),|
+|createTimestamp|createTimestamp|long|create time|
+|updateTimestamp|updateTimestamp|long|update time|
+|errCode|errCode|int|optional, errCode|
+|auditId|auditId|String|require(means balance_audit.id)|
+|remarks|remarks|String|for but / sell, means 'convert amount';for TWD deposit / withdraw, usually means 'refund reason'|
+|toReceiver.name|toReceiver.name|String|only when USDT withdraw, means '常用收款人名稱'|
+|toReceiver.address|toReceiver.address|String|only when USDT withdraw, means '收款錢包地址'|
+|txUrl|txUrl|String|only when USDT deposit/withdraw|
+|txHash|ethTxHash|String|only when USDT deposit/withdraw|
+|toBank.code|toBank.code|int|only when TWD deposit, also deal was not complete|
+|toBank.account|toBank.account|int|only when TWD deposit, also deal was not complete|
+|toBank.name|toBank.name|String|only when TWD deposit, also deal was not complete|
+|toBank.expireTimestamp|toBank.expireTimestamp|long|only when TWD deposit, also deal was not complete|
+|fromBank.code|fromBank.code|int|only when TWD deposit/withdraw|
+|fromBank.account|fromBank.account|int|only when TWD deposit/withdraw|
+|fromBank.accountHolder|fromBank.accountHolder|String|only when TWD deposit/withdraw|
+|fromBank.name|fromBank.name|String|only when TWD deposit/withdraw|
+|baseCurrencyUnitPrice|baseCurrencyUnitPrice|double|only when buy/sell. 基礎貨幣對目標貨幣的單價例如這裡是購買USDT, 基礎貨幣為TWD, 一個USDT的基礎貨幣單價為32TWD|
+|baseCurrencyTotalPrice|baseCurrencyTotalPrice|double|only when buy/sell購買目標貨幣換算成基礎貨幣的總價|
+
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Pre Deposit - Deposit Information
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1612333115396,
+    "data": [
+        {
+            "bank": {
+                "code": "005",
+                "name":"臺灣土地銀行",
+                "account": "****4556"
+            },
+            "virtualBank": {
+                "code": "809",
+                "name": "凱基商業銀行",
+                "branchCode": "0094",
+                "branchName": "營業部",
+                "account": "0000138492302304",
+                "accountHolder": "畢竟XXX公司"
+            }
+            "dailyAccumulated": 500000.0,
+            "monthlyAccumulated": 1000000.0
+        }
+    ],
+    "success": true
+}
+```
+
+> Response Example: 400 No bank info
+
+```json
+{
+    "code": 3006,
+    "msg": null,
+    "time": 1624241013180,
+    "data": null,
+    "success": false
+}
+```
+
+### HTTP Request
+`GET /v1/wallet/pre_deposit	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|currency|String|Y|currency name|TWD, USDT|
+
+
+
+### Response
+
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|bank.code||String|銀行代號|
+|bank.name||String|銀行名稱|
+|bank.account||String|銀行帳號(只顯示後四碼，前面用四個*遮蔽)|
+|virtualBank.code||String|虛擬帳號的銀行代號|
+|virtualBank.name||String|虛擬帳號的銀行名稱|
+|virtualBank.branchCode||String|虛擬帳號的分行代號|
+|virtualBank.branchName||String|虛擬帳號的分行名稱|
+|virtualBank.account||String|虛擬帳號|
+|virtualBank.accountHolder||String|虛擬帳號的戶名|
+|dailyAccumulated||double|每日累積最大金額|
+|monthlyAccumulated||double|每月累積最大金額|
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Pre Withdraw - Withdraw Information
+
+> Response Example: 
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1612333115396,
+    "data": [
+        {
+            "fee": 5.0,
+            "minLimit": 20.0,
+            "maxLimit": 50000.0,   
+            "dailyAccumulated": 100000.0,
+            "monthlyAccumulated": 200000.0,
+            "paymentWay": "ERC20",
+            "isSupportAddressExtension": false
+        }, {
+            "fee": 1.0,
+            "minLimit": 20.0,
+            "maxLimit": 50000.0,    
+            "dailyAccumulated": 100000.0,    
+            "monthlyAccumulated": 200000.0,
+            "paymentWay": "TRC20",
+            "isSupportAddressExtension": false
+        }
+    ],
+    "success": true
+}
+```
+
+
+### HTTP Request
+`GET /v1/wallet/pre_withdraw	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|currency|String|Y|currency name|TWD, USDT|
+
+
+
+### Response
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|fee||double|手續費|
+|minLimit||double|單筆最小金額|
+|maxLimit||double|單筆最大金額|
+|dailyAccumulated||double|每日累積最大金額|
+|monthlyAccumulated||double|每月累積最大金額|
+|paymentWay||String|Fiat: SWIFTCrypto: ERC20 / TRC20|
+|isSupportAddressExtension||boolean|是否支援 tag/memo 欄位|
+|addressExtensionTypeName||string|naming of addressExtension|
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Withdraw - Withdraw Apply
+
+> Response Example: 200 Fiat
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624243302239,
+    "data": {
+        "auditId": "52638d3e-c07a-4467-9b9b-ad4557658acc",
+        "currency": "TWD",
+        "fee": 15.0,
+        "amount": 110.0,
+        "status": 17,
+        "transactionTimestamp": 1624243302120,
+        "toBank": {
+            "id": 979,
+            "name": "凱基商業銀行　台南分行",
+            "code": "809",
+            "account": "1531087300",
+            "accountHolder": "傳",
+            "swiftCode": ""
+        },
+        "toAddress": null,
+        "transactionRef": "20210621006023"
+    },
+    "success": true
+}
+```
+
+> Response Example: 200 Crypto
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624243673583,
+    "data": {
+        "auditId": "bf19d889-207c-49c3-9b18-d79b0cb2e241",
+        "currency": "USDT",
+        "fee": 5.0,
+        "amount": 20.0,
+        "status": 17,
+        "transactionTimestamp": 1624243673555,
+        "toBank": null,
+        "toAddress": {
+            "name": "",
+            "address": "0xd4915B3b83230E4D94f9765a31DA1145Bb5719E9"
+        },
+        "transactionRef": "20210621006025"
+    },
+    "success": true
+}
+```
+
+
+### HTTP Request
+`POST /v1/wallet/withdraw`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|currency|String|Y|currency name|TWD / USDT / ETH|
+|bankId|Integer|N|如果currency是法幣 (TWD)||
+|address|String|N|如果currency是虛擬幣 (USDT / ETH)||
+|paymentWay|String|N|如果currency是虛擬幣 (USDT / ETH)|ERC20 / TRC20|
+|amount|Double|Y|withdraw amount||
+|code2FA|String|Y|2FA code||
+
+
+
+### Response
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|auditId||Stirng||
+|currency||String||
+|amount||double||
+|fee||double||
+|status||init|交易狀態|
+|transactionTimestamp||long||
+|toBank||BankData|isOptional|
+|toAddress||ArressData|isOptional|
+
+- toBank: CurrencyType 為 FIAT 時存在<br>
+- toAddress: CurrencyType 為 CRYPTO 時存在
+
+
+#### BankData
+|FE|Type|
+|--- |--- |
+|code|String|
+|name|String|
+|account|String|
+|accountHolder|String|
+
+#### AddressData
+|FE|Type|
+|--- |--- |
+|name|String|
+|address|String|
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Withdraw - Withdraw Confirm
+
+> Response Example: 200 Fiat
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624243302239,
+    "data": {
+        "auditId": "52638d3e-c07a-4467-9b9b-ad4557658acc",
+        "currency": "TWD",
+        "fee": 15.0,
+        "amount": 110.0,
+        "status": 17,
+        "transactionTimestamp": 1624243302120,
+        "toBank": {
+            "id": 979,
+            "name": "凱基商業銀行　台南分行",
+            "code": "809",
+            "account": "1531087300",
+            "accountHolder": "傳",
+            "swiftCode": ""
+        },
+        "toAddress": null,
+        "transactionRef": "20210621006023"
+    },
+    "success": true
+}
+```
+
+> Response Example: 200 Crypto
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624243673583,
+    "data": {
+        "auditId": "bf19d889-207c-49c3-9b18-d79b0cb2e241",
+        "currency": "USDT",
+        "fee": 5.0,
+        "amount": 20.0,
+        "status": 17,
+        "transactionTimestamp": 1624243673555,
+        "toBank": null,
+        "toAddress": {
+            "name": "",
+            "address": "0xd4915B3b83230E4D94f9765a31DA1145Bb5719E9"
+        },
+        "transactionRef": "20210621006025"
+    },
+    "success": true
+}
+```
+
+
+### HTTP Request
+`PATCH /v1/wallet/withdraw`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|auditId|String|Y|balance_audit Id|UUID|
+|codeEmail|String|Y|email confirm code|123456|
+
+
+### Response
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|auditId||Stirng||
+|currency||String||
+|amount||double||
+|fee||double||
+|status||init|交易狀態|
+|transactionTimestamp||long||
+|toBank||BankData|isOptional|
+|toAddress||ArressData|isOptional|
+
+- toBank: CurrencyType 為 FIAT 時存在<br>
+- toAddress: CurrencyType 為 CRYPTO 時存在
+
+
+#### BankData
+|FE|Type|
+|--- |--- |
+|code|String|
+|name|String|
+|account|String|
+|accountHolder|String|
+
+#### AddressData
+|FE|Type|
+|--- |--- |
+|name|String|
+|address|String|
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get or Create Address	
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1611134714327,
+    "data": {
+        "address": "TR2AgRfU8g3ZMTaCMT28Vp8ymTUG2ADfg4",
+        "paymentWay": "TRC20",
+        "time": 1611133937000
+    },
+    "success": true
+}
+
+```
+
+> Response Example: 400 获取虚拟币钱包地址出错
+
+```json
+{
+  "code": -4038,
+  "msg": "获取虚拟币钱包地址出错",
+  "time": 1596419834727,
+  "data": null,
+  "success": false
+}
+```
+
+
+### HTTP Request
+`POST /v1/wallet/address	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|coinNetwork|String|N|開哪一個幣的錢包 default: USDT-ERC20|USDT-ERC20||
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get or Create  Addresses
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1611134706599,
+    "data": [
+        {
+            "address": "0xbA6B41D800cca87b405076e783f3675bE649F912",
+            "paymentWay": "ERC20",
+            "time": 1605169759000
+        },
+        {
+            "address": "TR2AgRfU8g3ZMTaCMT28Vp8ymTUG2ADfg4",
+            "paymentWay": "TRC20",
+            "time": 1611133937000
+        }
+    ],
+    "success": true
+}
+```
+
+> Response Example: 400 当前用户状态无法存款
+
+```json
+{
+    "code": 40039,
+    "msg": null,
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`POST /v1/wallet/addresses	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|coinNetwork|String|N|開哪一個幣的錢包 defualt: USDT-ERC20,USDT-TRC20|USDT-ERC20|前端可不給值，或也可給多個coinNetwork(用逗號分開)ex. "USDT-ERC20,USDT-TRC20"|
+
+
+
+### Response
+|FE|BE|Type|
+|--- |--- |--- |
+|||Array \<AddressData\>|
+
+#### Address Data
+|FE|BE|Type|
+|--- |--- |--- |
+|address||String|
+|paymentWay||String|
+|time||long|
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Pre Exchange	
+
+> Request Example: 
+
+```json
+{"currency":"USDT"}
+```
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1600332049424,
+    "data": {
+        "minLimit": 5,
+        "maxLimit": 30000
+    },
+    "success": true
+}
+```
+
+
+### HTTP Request
+`GET /v1/trade/pre_exchange	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|
+|--- |--- |--- |--- |
+|currency|String|Y|USDT, ETH|
+
+
+
+### Response
+|FE|BE|Type|
+|--- |--- |--- |
+|minLimit||double|
+|maxLimit||double|
+
+
+
+<aside class="success"> Authentication - No Needed </aside> 
+
+## Get OTC Quote	
+取得一個USDT需要多少TWD的quote
+
+> Response Example: 200
+
+```json
+
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1596419834727,
+    "data": {        
+        "originalUnitPrice": 55909.0673
+        "quoteAmountInBase": 1
+        "quoteAmountInOrder": 55909.067298
+        "quoteBaseCurrency": "ETH"
+        "quoteId": "38c5bf29-82e3-4469-a006-4b2d76384818"
+        "quoteOrderCurrency": "TWD"
+        "quoteTimestamp": 1624329420965
+        "quoteValidDurationMs": 6000
+        "side": "buy"
+        "status": 30001
+        "unitPrice": 55909.0673
+     },
+    "success": true
+}
+```
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1596419834727,
+    "data": {
+        "quoteId": "2a90a700-dde3-4da2-abdf-3277700575df",
+        "quoteValidDurationMs": 10000,
+        "quoteTimestamp": 1596419834727,
+        "quoteAmountInBase": 1,
+        "quoteBaseCurrency": "USDT",
+        "quoteAmountInOrder": 32.0752149,
+        "quoteOrderCurrency": "TWD",
+        "unitPrice": 32.0752149,
+        "originalUnitPrice": 32.1234,
+        "side": "buy"
+    },
+    "success": true
+}
+```
+
+
+### HTTP Request
+`POST /v1/trade/quote`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|side|String|Y|buy / sell|buy||
+|quoteAmountInBase|double|N|USDT數量(quoteAmountInBase/ quoteAmountInOrder二擇一傳送)|1||
+|quoteAmountInOrder|double|N|TWD數量(quoteAmountInBase/ quoteAmountInOrder二擇一傳送)|32||
+|quoteBaseCurrency|String|Y|USDT / ETH|USDT|default: USDT|
+
+
+
+### Response
+quoteTimestamp + quoteValidDurationMs = 該筆quote失效時間
+
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Confirm OTC Quote	
+
+> Response Example: 200
+
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1596419834727,
+  "data": {    
+        "quoteAmountInBase": 1
+        "quoteAmountInOrder": 55816.912266
+        "quoteBaseCurrency": "ETH"
+        "quoteId": "a625eb37-538d-4c62-94a1-319b4d0cc18d"
+        "quoteOrderCurrency": "TWD"
+        "quoteValidDurationMs": 6000
+        "side": "buy"
+        "status": 30007
+        "transactionTimestamp": 1624329726655
+        "unitPrice": 55816.9123  
+    },
+  "success": true
+}
+```
+
+> Response Example: 400 当前用户状态无法进行虚拟币买卖
+
+```json
+
+{
+    "code": 40049,
+    "msg": null,
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`POST /v1/trade/accept`
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|quoteId|String|Y|從/quote取得的quoteId|2a90a700-dde3-4da2-abdf-3277700575df||
+
+
+
+### Response
+status:<br>
+30007 = 成功<br>
+30008 = 已改價(失敗)<br>
+8 = 可用餘額不足(失敗)
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get Quote Line Chart	
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1605497139778,
+    "data": [
+    {
+        "time": 1604892339753,
+        "value": 30.0
+    },
+    {
+        "time": 1604978739753,
+        "value": 30.0
+    },
+    {
+        "time": 1605065139753,
+        "value": 30.0
+    },
+    {
+        "time": 1605151539753,
+        "value": 30.0
+    },
+    {
+        "time": 1605237939753,
+        "value": 28.52
+    },
+    {
+        "time": 1605324339753,
+        "value": 28.52
+    },
+    {
+        "time": 1605410739753,
+        "value": 28.52
+    },
+    {
+        "time": 1605497139753,
+        "value": 28.52
+    }    ],
+    "success": true
+}
+```
+
+> Response Example: 400 Invalid type
+
+```json
+{
+    "code": -2,
+    "msg": "Invalid type.",
+    "time": 1605497394276,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`GET /v1/trade/line_chart	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Descript|Example|Note|
+|--- |--- |--- |--- |--- |--- |
+|rangeType|Integer|Y|time range|0||
+|currency|String|N|數位貨幣|USDTETH|default:USDT|
+
+#### RangeType 
+  <br>Day = 0,
+  <br>Week = 1,
+  <br>Month = 2,
+  <br>Season = 3,
+  <br>Year = 4,
+  <br>All = 5,
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="success"> Authentication - No Needed </aside> 
+
+## Get Bank Code List	
+取得銀行代碼清單	
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1596794050933,
+    "data": [
+       {"code": "000", "name": "中央銀行國庫局"},
+       {"code": "004", "name": "臺灣銀行"},
+       {"code": "005", "name": "臺灣土地銀行"},
+       ...
+       {"code": "021", "name": "花旗（台灣）商業銀行"},
+       ...
+       {"code": "995", "name": "關貿網路股份有限公司"},
+       {"code": "996", "name": "財政部國庫署"},
+       {"code": "997", "name": "中華民國信用合作社聯合社南區聯合資訊處理中心"}
+    ],
+    "success": true
+}
+```
+
+> Response Example: 401 token过期
+
+```json
+{
+    "code": 10002,
+    "msg": null,
+    "time": 1596794050933,
+    "data": null,
+    "success": true
+}
+```
+
+
+### HTTP Request
+`GET /v1/finance/bank_codes	`<br>
+`application/json`
+
+### URL Parameters
+None
+
+### Response
+|FE|BE|Type|
+|--- |--- |--- |
+|||Array \<BankData\>|
+
+#### BankData
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|code||String|銀行代號|
+|name||String|金融機構名稱|
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get bank branch list	
+取得銀行分行清單	
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1596794050933,
+    "data": [
+       {"code": "0018", "name": "營業部"},
+       {"code": "0030", "name": "高雄分行"},
+       {"code": "0041", "name": "台中分行"},
+       ...
+       {"code": "0650", "name": "土城分行"}
+    ],
+    "success": true
+}
+```
+
+> Response Example: 401 token过期
+
+```json
+{
+    "code": 10002,
+    "msg": null,
+    "time": 1596794050933,
+    "data": null,
+    "success": true
+}
+```
+
+
+### HTTP Request
+`GET /v1/finance/bank_branches	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|code|String|Y|bank code|021|
+
+
+### Response
+|FE|BE|Type|
+|--- |--- |--- |
+|||Array \<BankBranchData\>|
+
+#### BankBranchData
+|FE|BE|Type|Description|
+|--- |--- |--- |--- |
+|code||String|分支機構代號|
+|name||String|分支機構名稱|
+
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Get Common Address
+取得常用地址
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624506922403,
+    "data": [
+        {
+            "address": "0xF90Ba8eD88e85899EFf6b51f7A90F37c3f9ef56f",
+            "name": "bomaxTest234Checksum",
+            "paymentWay": null
+        }
+    ],
+    "success": true
+}
+```
+
+> Response Example: 400 当前用户状态无法存款
+
+```json
+{
+    "code": 40039,
+    "msg": null,
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`GET /v1/wallet/common_address	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Example|
+|--- |--- |--- |--- |--- |
+|coinName|String|N|coin network|USDT-ERC20, USDT-TRC20, ETH-ETHEREUM, BTC-BITCOIN|
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+
+
+## Delete Common Address 	
+刪除常用地址	
+
+> Response Example: 
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624505965765,
+    "data": null,
+    "success": true
+}
+```
+
+
+### HTTP Request
+`DELETE /v1/wallet/common_address	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|
+|--- |--- |--- |--- |
+|address|string|Y|ETH / TRX 位址, 也當作ID|
+
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="warning"> Authentication - Needed </aside> 
+
+## Cancel Diposit/Withfraw
+取消「出金/入金」
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1624516485354,
+    "data": {
+        "updateTimestamp": 1624487685641,
+        "status": 16,
+        "createTimestamp": 1624487630481
+    },
+    "success": true
+}
+```
+
+> Response Example: 400 token过期
+
+```json
+{
+    "code": 10002,
+    "msg": "token过期",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 無法取得使用者錢包帳戶紀錄
+
+```json
+{
+    "code": 3500,
+    "msg": "Error getting user balance",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 虛擬幣出入/金紀錄,不允許取消
+
+```json
+{
+    "code": 3516,
+    "msg": "Error updating crypto wallet",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 無法取消入金操作
+
+```json
+{
+    "code": 3519,
+    "msg": "Error in cancellation request",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 無法取消出金操作
+
+```json
+{
+    "code": 3521,
+    "msg": "Error performing cancellation request",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+> Response Example: 400 未知操作
+
+```json
+{
+    "code": -20,
+    "msg": "未知操作",
+    "time": 1596419834727,
+    "data": null,
+    "success": false
+}
+```
+
+
+### HTTP Request
+`POST /v1/wallet/apply_dw_cancel	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Note|
+|--- |--- |--- |--- |--- |
+|auditId|string|Y|balance audit id|後端實作時，需注意 HistoryList api 拿到的 auditId 並非 BalanceAudit.Id|
+
+
+
+### Response
+Status<br>
+OPEN(1, "Open", "PROCESSING")<br>
+CANCELED(6, "Cancel", "CANCELED"),<br>
+COMPLETED(10, "Completed", "COMPLETED"),<br>
+PENDING(17, "Pending", "PENDING"),
+
+<aside class="success"> Authentication - No Needed </aside> 
+
+## Get Crypto Paymentway	
+
+> Response Example: 200
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1611909599677,
+    "data": {
+        "USDT": [
+            "ERC20",
+            "TRC20"
+        ],
+        "ETH": [
+            "ERC20"
+        ]
+    },
+    "success": true
+}
+```
+
+
+### HTTP Request
+`GET /v1/wallet/crypto_paymentway	`<br>
+`application/json`
+
+### URL Parameters
+|Key|Type|Required|Description|Note|
+|--- |--- |--- |--- |--- |
+|currency|string|N|ex : USDTETH|目前bitgin僅有USDT有分payment way目前會回傳ERC20及TRC20, 根據未來需求會陸續增加|
+
+
+### Response
+Please refer response example
+
+
+
+<aside class="success"> Authentication - No Needed </aside> 
+
+
+
+## Get All Tickers
+
+> Response Example: 
+
+```json
+{
+        "code": 1,
+        "msg": "Success",
+        "time": 1624330428505,
+        "data": [
+            {
+                "baseCurrency": "USDT",
+                "quoteCurrency": "TWD",
+                "changePricePercent": 0.46345472031234014,
+                "lastPrice": 27.99595
+            },
+            {
+                "baseCurrency": "ETH",
+                "quoteCurrency": "TWD",
+                "changePricePercent": -11.465535138342627,
+                "lastPrice": 55819.3285125
+            }
+        ],
+        "success": true
+    }
+```
+
+
+### HTTP Request
+`GET /v1/allTickers`<br>
 `application/json`
 
 ### URL Parameters
@@ -2203,154 +3690,4 @@ Please refer response example
 
 
 
-<aside class="warning"> Authentication - Needed </aside> 
-
-## Example
-
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
-
-```json
-
-```
-
-
-### HTTP Request
-`GET /v1/user`<br>
-`application/json`
-
-### URL Parameters
-None
-
-
-### Response
-Please refer response example
-
-
-
-<aside class="warning"> Authentication - Needed </aside> 
-
-## Example
-
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
-
-```json
-
-```
-
-
-### HTTP Request
-`GET /v1/user`<br>
-`application/json`
-
-### URL Parameters
-None
-
-
-### Response
-Please refer response example
-
-
-
-<aside class="warning"> Authentication - Needed </aside> 
-
-## Example
-
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
-
-```json
-
-```
-
-
-### HTTP Request
-`GET /v1/user`<br>
-`application/json`
-
-### URL Parameters
-None
-
-
-### Response
-Please refer response example
-
-
-
-<aside class="warning"> Authentication - Needed </aside> 
-
-## Example
-
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
-
-```json
-
-```
-
-
-### HTTP Request
-`GET /v1/user`<br>
-`application/json`
-
-### URL Parameters
-None
-
-
-### Response
-Please refer response example
-
-
-
-<aside class="warning"> Authentication - Needed </aside> 
-
-## Example
-
-> Request Example: 
-
-```json
-
-```
-
-> Response Example: 
-
-```json
-
-```
-
-
-### HTTP Request
-`GET /v1/user`<br>
-`application/json`
-
-### URL Parameters
-None
-
-
-### Response
-Please refer response example
-
-
-
-<aside class="warning"> Authentication - Needed </aside> 
+<aside class="success"> Authentication - No Needed </aside> 

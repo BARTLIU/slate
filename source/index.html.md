@@ -25,56 +25,6 @@ code_clipboard: true
 5. Response Format<br>
 
 
-# Authentication
-
-*   API Key (btse-api)
-    *   Parameter Name: **btse-api**, in: header. API key is obtained from BTSE platform as a string
-
-*   API Key (btse-nonce)
-    *   Parameter Name: **btse-nonce**, in: header. Representation of current timestamp in long format
-
-*   API Key (btse-sign)
-    *   Parameter Name: **btse-sign**, in: header. A composite signature produced based on the following algorithm: `Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr))` (note: bodyStr = '' when no data):
-
-##### Example: Get wallet
-1.  btse-nonce: 1582258739280
-2.  btse-api: ZDllY2VhNGE2NzU3NDljYmE0ZmIzNjE4MWNjMTMyNjA=
-3.  btse-sign: 6632bceab44c4259716578b799482b5334f432da1095931f4295a64b8bbd41c47f08c32d9f63cb22f6f44c57270e9c99 (=HMAC.Sha384(secretKey, /api/v3.2/user/wallet1582258739280))
-
-##### Example: Place an order
-1.  btse-nonce: 1583833946481
-2.  btse-api: ZDllY2VhNGE2NzU3NDljYmE0ZmIzNjE4MWNjMTMyNjA=
-3.  btse-sign: 78c5a1414f3de7aebf60d497fa8417a7daffcfe0503ecd57c0782edc1fcc3718f3ca20b6049ad27e62f93a1f44f9c856 (=HMAC.Sha384(secretKey, /api/v3.2/order1583833946481{"size":0.002,"price":8500,"side":"BUY","type":"LIMIT","symbol":"BTC-USD"}))
-
-*   API Key (btse-api)
-    
-    *   Parameter Name: **btse-api**, in: header. API key is obtained from BTSE platform as a string
-*   API Key (btse-nonce)
-    
-    *   Parameter Name: **btse-nonce**, in: header. Representation of current timestamp in long format
-
-
-<aside class="notice">
-Some of the actions must required the <code>API key</code>.
-</aside>
-
-
-Rate Limits
------------
-
-Rate limits for BTSE is as follows:
-
-**Query**
-
-*   Per API: `15 requests per second`
-*   Per User: `30 requests per second`
-
-**Orders**
-
-*   Per API: `75 requests per second`
-*   Per User: `75 requests per second`
-
-
 API Status
 ----------
 
@@ -91,40 +41,14 @@ Each API will return one of the following HTTP status:
 *   500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
 
-BTSE Enum
----------
-
-When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
-
-*   1: MARKET\_UNAVAILABLE = Futures market is unavailable
-*   2: ORDER\_INSERTED = Order is inserted successfully
-*   4: ORDER\_FULLY\_TRANSACTED = Order is fully transacted
-*   5: ORDER\_PARTIALLY\_TRANSACTED = Order is partially transacted
-*   6: ORDER\_CANCELLED = Order is cancelled successfully
-*   8: INSUFFICIENT\_BALANCE = Insufficient balance in account
-*   9: TRIGGER\_INSERTED = Trigger Order is inserted successfully
-*   10: TRIGGER\_ACTIVATED = Trigger Order is activated successfully
-*   12: ERROR\_UPDATE\_RISK\_LIMIT = Error in updating risk limit
-*   15: ORDER\_REJECTED = Order is rejected
-*   16: ORDER\_NOTFOUND = Order is not found with the order ID or clOrderID provided
-*   28: TRANSFER\_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
-*   27: TRANSFER\_SUCCESSFUL = Transfer funds between futures and spot is successful
-*   41: ERROR\_INVALID\_RISK\_LIMIT = Invalid risk limit was specified
-*   64: STATUS\_LIQUIDATION = Account is undergoing liquidation
-*   101: FUTURES\_ORDER\_PRICE\_OUTSIDE\_LIQUIDATION\_PRICE = Futures order is outside of liquidation price
-*   1003: ORDER\_LIQUIDATION = Order is undergoing liquidation
-*   1004: ORDER\_ADL = Order is undergoing ADL
-
 Supported Currencies
 --------------------
 
 Currencies listed in this section are the available crypto currencies that can be used for address creation, and withdrawals.
 
 *   BTC
-*   BTC-LIQUID
-*   USDT-OMNI
 *   USDT-ERC20
-*   USDT-LIQUID
+*   USDT-TRC20
 *   ETH
 
 

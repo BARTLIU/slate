@@ -6,8 +6,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 
 toc_footers:
-  - <a href='#'>The API Key might be requried for some API Endpoints</a>
-  - <a href='https://www.btse.com/en/home'>Documentation Powered by BTSE</a>
+  - <a href='#'></a>
+  - <a href='https://www.btse.com/en/home'>Powered by BTSE</a>
 
 
 search: true

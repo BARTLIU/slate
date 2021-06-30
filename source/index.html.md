@@ -472,8 +472,8 @@ print r.json()
 ### Parameters
 |Name|In|Type|Required|Description|
 |--- |--- |--- |--- |--- |
-|startTime|query|integer(int64)|false|startTime|
-|endTime|query|integer(int64)|false|endTime|
+|startTime|query|integer(int64)|false|The format should be 10 digits Unix Timestamp|
+|endTime|query|integer(int64)|false|The format should be 10 digits Unix Timestamp|
 |count|query|integer(int32)|false|count|
 |currency|query|string|false|currency|
 
@@ -661,7 +661,9 @@ WalletHistoryMdl
   "timestamp": 1571630174639,
   "type": 1,
   "username": "btseUser",
-  "wallet": "SPOT@"
+  "wallet": "SPOT@",
+  "txid": <Blockchain Transaction ID>,
+  "currencyNetwork": <Blockchain currency network>
 }
 
 ```
@@ -680,6 +682,8 @@ WalletHistoryMdl
 |type|string|true|none|Available values are:<br>Deposit - Deposits into account<br>Withdraw - Withdrawals from account<br>Transfer_In - BTSE internal transfer where funds are transferred in<br>Transfer_Out - BTSE internal transfer where funds are transferred out<br>ReferralEarning - Referral Earnings|
 |username|string|true|none|username|
 |wallet|string|true|none|wallet|
+|txid|string|true|none|Blockchain Transaction ID|
+|currencyNetwork|string|true|none|Blockchain currency network|
 
 ## WithdrawResponse
 WithdrawResponse

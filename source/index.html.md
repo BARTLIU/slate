@@ -41,11 +41,6 @@ You will need to create an API key on the BTSE platform before you can use authe
 4. Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)
 5. Use your API key and passphrase to construct a signature.
 
-Base URLs:<br>
-1. Production - <a href='https://api.btse.com/spot'>https://api.btse.com/spot</a><br>
-2. Production Websockets - <a href='wss://ws.btse.com/ws/spot'>wss://ws.btse.com/ws/spot</a><br>
-3. Testnet - <a href='https://api.btse.com/spot'>https://api.btse.com/spot</a><br>
-4. Testnet Websockets - <a href='wss://ws.btse.com/ws/spot'>wss://ws.btse.com/ws/spot</a><br>
 
 
 ## Authentication

@@ -346,9 +346,6 @@
                     <a href="#get-wallet-address" class="toc-h2 toc-link" data-title="Get Wallet Address">Get Wallet Address</a>
                   </li>
                   <li>
-                    <a href="#wallet-balances" class="toc-h2 toc-link" data-title="Wallet Balances">Wallet Balances</a>
-                  </li>
-                  <li>
                     <a href="#wallet-history" class="toc-h2 toc-link" data-title="Wallet History">Wallet History</a>
                   </li>
                   <li>
@@ -762,109 +759,6 @@ curl <span class="nt">-X</span> GET https://api.btse.com/spot/api/v3.2/user/wall
 </tbody></table>
 
 <aside class="warning">  To perform this operation, you must be authenticated</aside> 
-<h2 id='wallet-balances'>Wallet Balances</h2>
-<p>Gets user wallet balances</p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET /api.btse.com/spot/api/v3.2/user/wallet <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json;charset=UTF-8'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
-<span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.btse.com/spot/api/v3.2/user/wallet"</span><span class="o">);</span>
-<span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="nc">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="nc">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json;charset=UTF-8'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/api.btse.com/spot/api/v3.2/user/wallet'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
-<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-
-
-</code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET /api/v3.2/user/wallet</code></p>
-
-<blockquote>
-<p>Example responses <br>
-200 Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="mf">520.52</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">5566.5566</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='response-3'>Response</h3>
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Get wallet info of user.</td>
-<td><a href="#fiatmdl">FiatMdl</a></td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Bad Request</td>
-<td><a href="#errorresponse">ErrorResponse</a></td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Unauthorized</td>
-<td><a href="#errorresponse">ErrorResponse</a></td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Forbidden</td>
-<td><a href="#errorresponse">ErrorResponse</a></td>
-</tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Not Found</td>
-<td>None</td>
-</tr>
-<tr>
-<td>500</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Internal Server Error</td>
-<td><a href="#errorresponse">ErrorResponse</a></td>
-</tr>
-<tr>
-<td>503</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Service Unavailable</td>
-<td><a href="#errorresponse">ErrorResponse</a></td>
-</tr>
-</tbody></table>
-
-<aside class="warning">  To perform this operation, you must be authenticated</aside> 
 <h2 id='wallet-history'>Wallet History</h2>
 <p>Retrieves user&#39;s wallet history records</p>
 
@@ -900,7 +794,7 @@ curl <span class="nt">-X</span> GET /api.btse.com/spot/api/v3.2/user/wallet_hist
 
 <span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
 
-</code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+</code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET /api/v3.2/user/wallet_history</code></p>
 
 <blockquote>
@@ -960,7 +854,7 @@ curl <span class="nt">-X</span> GET /api.btse.com/spot/api/v3.2/user/wallet_hist
 <td>currency</td>
 </tr>
 </tbody></table>
-<h3 id='response-4'>Response</h3>
+<h3 id='response-3'>Response</h3>
 <table><thead>
 <tr>
 <th>Status</th>
@@ -1053,7 +947,7 @@ curl <span class="nt">-X</span> POST https://api.btse.com/spot/api/v3.2/user/wal
 
 
 
-</code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+</code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <blockquote>
@@ -1112,7 +1006,7 @@ curl <span class="nt">-X</span> POST https://api.btse.com/spot/api/v3.2/user/wal
 <td>Amount to withdraw</td>
 </tr>
 </tbody></table>
-<h3 id='response-5'>Response</h3>
+<h3 id='response-4'>Response</h3>
 <table><thead>
 <tr>
 <th>Status</th>

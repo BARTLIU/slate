@@ -325,7 +325,7 @@ print r.json()
 
 
 
-## Wallet Information
+## Wallet Balances
 Gets user wallet balances
 
 
